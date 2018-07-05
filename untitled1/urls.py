@@ -19,9 +19,12 @@ from people.views import UserView,resolv_client
 from people import client_ip
 import sys
 import untitled1
+from people.client_ip import process
 sys.path.append('/untitled1/people/client_ip')
 
 urlpatterns = [
+    #使用反射机制，为djiango开发一套动态路由
+    re_path('^(?P<app>(\w+))/(?P<function>(\w+))/$',process),
     path('admin/', admin.site.urls),
     path(r'',resolv_client.as_view()),
     re_path(r'^(?P<version>\w+)/users/$',UserView.as_view(),name='users')
